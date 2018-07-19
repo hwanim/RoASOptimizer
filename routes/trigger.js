@@ -56,7 +56,13 @@ router.get('/', function(req, res, next) {
     })
     .catch(errorFunction(test2));
 
-
+// //get campaigns
+//   let test3 = 'Node.js get active campaigns'
+//   account
+//     .getCampaigns(
+//       [],
+//       [Campaign.Fields.effective_status]: [Campaign.]
+//     )
 
 
   let test4 = 'Node.js nestedCalls';
