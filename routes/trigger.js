@@ -37,6 +37,43 @@ router.get('/', function(req, res, next) {
     }
   };
 
+  var campaignsInfo = new Map();
+  void async function () {
+      let campaigns = await account.getCampaigns([Campaign.Fields.name], {});
+      campaigns.forEach(c => {
+        // console.log(c.name); console.log(c.id);
+        campaignsInfo.set(c.name, c.id);
+      });
+
+      while (campaigns.hasNext()) {
+          campaigns = await campaigns.next();
+          campaigns.forEach(c => {
+            // console.log(c.name); console.log(c.id);
+            campaignsInfo.set(c.name, c.id);
+          });
+      }
+
+      console.log(campaignsInfo);
+
+
+      // let test3 = 'Node.js getInsights Edge';
+      // const insightsFields =
+      //   ['impressions', 'frequency', 'unique_clicks', 'actions', 'spend', 'cpc', 'ctr'];
+      //   for (var [key, value] of campaignsInfo) {
+      //     new Campaign(value)
+      //       .getInsights(insightsFields, {})
+      //       .then((insight) => { logPassedTest(test3 + ':Pass', insight);
+      //         console.log(insight);
+      //      })
+      //       .catch(errorFunction(test3));
+      //   }
+
+
+  }();
+
+  //
+
+
 
 // let test1 = 'Node.js read';
 // account
@@ -58,15 +95,15 @@ router.get('/', function(req, res, next) {
 //   })
 //   .catch(errorFunction(test2));
 //
-let test3 = 'Node.js getInsights Edge';
-const insightsFields =
-  ['impressions', 'frequency', 'unique_clicks', 'actions', 'spend', 'cpc', 'ctr'];
-new Campaign(campaignId)
-  .getInsights(insightsFields, {})
-  .then((insight) => { logPassedTest(test3 + ':Pass', insight);
-    console.log(insight);
- })
-  .catch(errorFunction(test3));
+// let test3 = 'Node.js getInsights Edge';
+// const insightsFields =
+//   ['impressions', 'frequency', 'unique_clicks', 'actions', 'spend', 'cpc', 'ctr'];
+// new Campaign(campaignId)
+//   .getInsights(insightsFields, {})
+//   .then((insight) => { logPassedTest(test3 + ':Pass', insight);
+//     console.log(insight);
+//  })
+//   .catch(errorFunction(test3));
 //
 // let test3a = 'Node.js getCampaigns Edge';
 // const campaignFields =
